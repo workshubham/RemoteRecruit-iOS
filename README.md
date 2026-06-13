@@ -9,7 +9,7 @@ setup, talking to the companion [RemoteRecruit backend](https://github.com/works
 | Language | Swift 5 |
 | UI | SwiftUI |
 | Concurrency | async/await + Observation (`@Observable`) |
-| Min iOS | 26.4 |
+| Min iOS | 18.6 |
 | Tests | Swift Testing |
 
 ## Screens
@@ -130,8 +130,6 @@ Coverage on the ViewModels / mapping / services is ~90% (well above the 70% targ
   JSON file — so list, search, sort and pagination all go over the network.
 - Company "logos" are coloured initials tiles using a brand colour from the API, so no
   remote image hosting is needed.
-- **Apply** is a local, self-contained feature — there's no real apply endpoint, so tapping
-  Apply just marks the job "Applied" for that session.
 - Salaries are formatted client-side from structured `{ min, max, currency, period }`
   values, so currency/locale presentation lives in the app.
 - The list shows a slim summary; the full description, responsibilities and company info
