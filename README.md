@@ -21,7 +21,7 @@ setup, talking to the companion [RemoteRecruit backend](https://github.com/works
 - **Job details** — hero, salary card, "About the role", "What you'll do", a company card
   (size / industry / founded), Share, and an Apply button that becomes "Applied".
 - **States** — every screen handles loading (shimmer skeletons), empty, and error (retry),
-  plus light and dark mode and a short branded splash on launch.
+  plus full light and dark mode.
 
 ## Getting started
 
@@ -52,7 +52,7 @@ would be organised so it stays maintainable as it grows.
 Domain        models (Job, JobSummary…) + the JobRepository protocol
 Data          networking, DTOs + mapping, the repository implementation
 Presentation  SwiftUI screens, each with an @Observable ViewModel (MVVM)
-Core          design system (theme/components) + small extensions
+Core          reusable UI components + small extensions
 ```
 
 The flow for a screen is: **View → ViewModel → JobRepository → HTTPClient → API**, with
@@ -70,27 +70,29 @@ A few decisions worth calling out:
 - **Networking is protocol-based** (`HTTPClient` + `URLSessionHTTPClient`), with requests
   described by a small `APIRequest` value and endpoints built in one place
   (`JobEndpoint`). Status codes map to a typed `RRNetworkError`.
-- **The design system is centralised** (`Theme`, `RRChip`, `CompanyLogoView`, shimmer,
-  status views) so the look stays consistent and light/dark is handled in one place.
+- **Reusable UI components** (`RRChip`, `CompanyLogoView`, shimmer, status views) live in
+  `Presentation/Components`, and semantic colours live in a `Colors` asset catalog with
+  light/dark variants — so the look stays consistent and theming sits in one place.
 
 ### Folder layout
 
 ```
 RemoteRecruit/
-  App/                 entry point + RootView (splash → list)
+  RemoteRecruitApp.swift   @main entry → JobListView
   Core/
-    DesignSystem/      Theme, Spacing, components (RRChip, CompanyLogoView, Shimmer…)
-    Extensions/        Color+Hex, Date+TimeAgo, SalaryRange+Formatting
+    Extensions/            Color+Hex, Date+TimeAgo, SalaryRange+Formatting
   Domain/
-    Models/            Job, JobSummary, JobPage, enums
-    Repositories/      JobRepository (protocol)
+    Models/                Job, JobSummary, JobPage, enums
+    Repositories/          JobRepository (protocol)
   Data/
-    Services/Network/  HTTPClient, URLSessionHTTPClient, APIRequest, errors, env
-    Jobs/              JobEndpoint, JobDTOs (+ mapping), JobRepositoryImpl
-    Applications/      AppliedJobsStore (UserDefaults)
+    Services/Network/      HTTPClient, URLSessionHTTPClient, APIRequest, errors, env
+    Jobs/                  JobEndpoint, JobDTOs (+ mapping), JobRepositoryImpl
   Presentation/
-    Modules/JobList | Search | JobDetail | Splash   (View + ViewModel each)
-  SupportingFiles/     Info.plist, Launch Screen, BuildConfiguration (xcconfig)
+    Components/            RRChip, CompanyLogoView, Shimmer, StatusView
+    Modules/JobList | Search | JobDetail   (View + ViewModel; JobList owns Navigation)
+  SupportingFiles/
+    Info.plist, Launch Screen, BuildConfiguration (xcconfig)
+    Resources/Assets.xcassets (AppIcon, logo) + Colors.xcassets (semantic colours)
 ```
 
 ## Environment configuration
@@ -118,7 +120,6 @@ Tests use **Swift Testing** with a `MockJobRepository`, covering the business lo
 - `SearchViewModelTests` — search results, no-match, empty query, errors
 - `JobDetailViewModelTests` — load success/error, apply marks applied
 - `JobMappingTests` — DTO → domain mapping, including unknown-enum fallbacks
-- `AppliedJobsStoreTests` — persistence across instances
 - `SalaryFormattingTests` — salary/currency formatting
 
 Coverage on the ViewModels / mapping / services is ~90% (well above the 70% target).
@@ -127,10 +128,10 @@ Coverage on the ViewModels / mapping / services is ~90% (well above the 70% targ
 
 - The app talks to the companion mock backend (a real `/api/jobs` API), not a hardcoded
   JSON file — so list, search, sort and pagination all go over the network.
-- Company "logos" are coloured initials tiles using a brand colour from the API, matching
-  the design (no remote image hosting needed).
-- **Apply** is a local, self-contained feature — there's no real apply endpoint, so the
-  applied state is stored on-device (UserDefaults) and persists across launches.
+- Company "logos" are coloured initials tiles using a brand colour from the API, so no
+  remote image hosting is needed.
+- **Apply** is a local, self-contained feature — there's no real apply endpoint, so tapping
+  Apply just marks the job "Applied" for that session.
 - Salaries are formatted client-side from structured `{ min, max, currency, period }`
   values, so currency/locale presentation lives in the app.
 - The list shows a slim summary; the full description, responsibilities and company info

@@ -429,6 +429,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RemoteRecruit/SupportingFiles/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RemoteRecruit;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				"INFOPLIST_KEY_UILaunchStoryboardName[sdk=iphoneos*]" = "Launch Screen";
@@ -465,6 +466,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RemoteRecruit/SupportingFiles/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RemoteRecruit;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				"INFOPLIST_KEY_UILaunchStoryboardName[sdk=iphoneos*]" = "Launch Screen";
