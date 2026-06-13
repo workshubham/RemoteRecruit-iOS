@@ -1,0 +1,18 @@
+//
+//  Common.xcconfig
+//  RemoteRecruit
+//
+//  Created by Shubham Arora on 13/06/26.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project
+
+// MARK: - API
+// xcconfig treats `//` as a comment, so the scheme's slashes are assembled from
+// pieces to keep them intact.
+SLASH = /
+PROTOCOL_HTTPS = https:$(SLASH)/
+
+API_URL = $(PROTOCOL_HTTPS)api.remoterecruit.example.com
+API_ENVIRONMENT = Production

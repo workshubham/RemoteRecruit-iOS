@@ -1,0 +1,18 @@
+//
+//  Local.xcconfig
+//  RemoteRecruit
+//
+//  Created by Shubham Arora on 13/06/26.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project
+
+// MARK: - API
+// Local development: the RemoteRecruit Node backend on the Mac. The simulator
+// reaches it directly on localhost.
+SLASH = /
+PROTOCOL_HTTP = http:$(SLASH)/
+
+API_URL = $(PROTOCOL_HTTP)localhost:4000
+API_ENVIRONMENT = Local
