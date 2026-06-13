@@ -9,7 +9,7 @@ import Foundation
 
 typealias APIConstants = AppConstants.API
 
-nonisolated enum AppConstants {
+enum AppConstants {
     
     enum API {
         /// Base URL, injected from the active xcconfig via Info.plist.

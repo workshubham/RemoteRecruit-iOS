@@ -8,10 +8,8 @@
 import Foundation
 import Observation
 
-@MainActor
 @Observable
 final class SearchViewModel {
-    nonisolated deinit {}
 
     enum State: Equatable {
         case idle

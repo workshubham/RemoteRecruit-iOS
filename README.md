@@ -27,9 +27,12 @@ setup, talking to the companion [RemoteRecruit backend](https://github.com/works
 
 You'll need Xcode 26+.
 
-1. **Start the backend** (the app reads from it on `http://localhost:4000`):
+1. **Start the backend** — the companion API lives in a separate repo:
+   [github.com/workshubham/RemoteRecruit-Backend](https://github.com/workshubham/RemoteRecruit-Backend).
+   The app reads from it on `http://localhost:4000`:
    ```bash
-   cd ../RemoteRecruit-Backend
+   git clone https://github.com/workshubham/RemoteRecruit-Backend.git
+   cd RemoteRecruit-Backend
    npm install
    npm run dev
    ```

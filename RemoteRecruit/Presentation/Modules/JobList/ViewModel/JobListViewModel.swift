@@ -8,10 +8,8 @@
 import Foundation
 import Observation
 
-@MainActor
 @Observable
 final class JobListViewModel {
-    nonisolated deinit {}
 
     enum State: Equatable {
         case loading

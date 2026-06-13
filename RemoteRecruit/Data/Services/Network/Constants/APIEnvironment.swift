@@ -7,7 +7,7 @@
 
 import Foundation
 
-nonisolated struct APIEnvironment {
+struct APIEnvironment {
     let name: String
     let baseURL: URL
 

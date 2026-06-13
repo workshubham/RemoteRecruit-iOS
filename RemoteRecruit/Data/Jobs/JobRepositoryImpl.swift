@@ -7,7 +7,7 @@
 
 import Foundation
 
-nonisolated final class JobRepositoryImpl: JobRepository {
+final class JobRepositoryImpl: JobRepository {
 
     private let http: HTTPClient
 

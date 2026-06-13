@@ -7,7 +7,7 @@
 
 import Foundation
 
-nonisolated final class URLSessionHTTPClient: HTTPClient {
+final class URLSessionHTTPClient: HTTPClient {
     
     static let shared = URLSessionHTTPClient()
     
